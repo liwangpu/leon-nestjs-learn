@@ -29,6 +29,12 @@
       ],
       "@app/package/*": [
         "libs/package/src/*"
+      ],
+      "@app/book": [
+        "libs/book/src"
+      ],
+      "@app/book/*": [
+        "libs/book/src/*"
       ]
     }
   }
