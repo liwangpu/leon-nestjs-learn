@@ -18,12 +18,6 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@app/user": [
-        "libs/user/src"
-      ],
-      "@app/user/*": [
-        "libs/user/src/*"
-      ],
       "@app/package": [
         "libs/package/src"
       ],
@@ -35,6 +29,12 @@
       ],
       "@app/book/*": [
         "libs/book/src/*"
+      ],
+      "@app/company": [
+        "libs/company/src"
+      ],
+      "@app/company/*": [
+        "libs/company/src/*"
       ]
     }
   }

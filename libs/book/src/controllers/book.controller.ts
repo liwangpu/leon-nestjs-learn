@@ -6,6 +6,7 @@ import { BookService } from '../services';
 export class BookController {
 
   public constructor(protected bookSrv: BookService) { }
+
   @Post()
   public async create(@Body() dto: CreateBookDto): Promise<any> {
 
@@ -16,3 +17,4 @@ export class BookController {
     return m;
   }
 }
+
