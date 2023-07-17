@@ -8,6 +8,8 @@ import { User, UserSchema } from './models';
 import { Services } from './services';
 import { AuthController } from './controllers/auth.controller';
 import { JwtModule } from '@nestjs/jwt';
+import { TMP_JWT_SECRET } from './consts';
+import { Guards } from './guards';
 
 @Module({
   imports: [
@@ -17,7 +19,7 @@ import { JwtModule } from '@nestjs/jwt';
     ]),
     JwtModule.register({
       global: true,
-      secret: '12332423423423423423324',
+      secret: TMP_JWT_SECRET,
       signOptions: { expiresIn: `1 days` },
     }),
   ],
@@ -29,6 +31,7 @@ import { JwtModule } from '@nestjs/jwt';
   providers: [
     ...CommandHandlers,
     ...Services,
+    ...Guards,
   ],
   exports: [],
 })
