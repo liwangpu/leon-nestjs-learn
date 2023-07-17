@@ -30,11 +30,11 @@
       "@app/book/*": [
         "libs/book/src/*"
       ],
-      "@app/company": [
-        "libs/company/src"
+      "@app/user": [
+        "libs/user/src"
       ],
-      "@app/company/*": [
-        "libs/company/src/*"
+      "@app/user/*": [
+        "libs/user/src/*"
       ]
     }
   }

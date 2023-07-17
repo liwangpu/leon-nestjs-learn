@@ -23,6 +23,7 @@
     "@nestjs/common": "^10.0.0",
     "@nestjs/core": "^10.0.0",
     "@nestjs/cqrs": "^10.0.1",
+    "@nestjs/jwt": "^10.1.0",
     "@nestjs/mongoose": "^10.0.0",
     "@nestjs/platform-express": "^10.0.0",
     "class-transformer": "^0.5.1",
@@ -75,11 +76,9 @@
       "<rootDir>/libs/"
     ],
     "moduleNameMapper": {
-      "^@app/database(|/.*)$": "<rootDir>/libs/database/src/$1",
-      "^@app/user(|/.*)$": "<rootDir>/libs/user/src/$1",
       "^@app/package(|/.*)$": "<rootDir>/libs/package/src/$1",
       "^@app/book(|/.*)$": "<rootDir>/libs/book/src/$1",
-      "^@app/company(|/.*)$": "<rootDir>/libs/company/src/$1"
+      "^@app/user(|/.*)$": "<rootDir>/libs/user/src/$1"
     }
   }
 }
