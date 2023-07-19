@@ -20,6 +20,8 @@
     "@app/book/(.*)": "<rootDir>/../libs/book/src/$1",
     "@app/book": "<rootDir>/../libs/book/src",
     "@app/company/(.*)": "<rootDir>/../libs/company/src/$1",
-    "@app/company": "<rootDir>/../libs/company/src"
+    "@app/company": "<rootDir>/../libs/company/src",
+    "@app/tenant/(.*)": "<rootDir>/../libs/tenant/src/$1",
+    "@app/tenant": "<rootDir>/../libs/tenant/src"
   }
 }

@@ -25,13 +25,13 @@
         "tsConfigPath": "libs/book/tsconfig.lib.json"
       }
     },
-    "user": {
+    "tenant": {
       "type": "library",
-      "root": "libs/user",
+      "root": "libs/tenant",
       "entryFile": "index",
-      "sourceRoot": "libs/user/src",
+      "sourceRoot": "libs/tenant/src",
       "compilerOptions": {
-        "tsConfigPath": "libs/user/tsconfig.lib.json"
+        "tsConfigPath": "libs/tenant/tsconfig.lib.json"
       }
     }
   }

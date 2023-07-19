@@ -78,7 +78,8 @@
     "moduleNameMapper": {
       "^@app/package(|/.*)$": "<rootDir>/libs/package/src/$1",
       "^@app/book(|/.*)$": "<rootDir>/libs/book/src/$1",
-      "^@app/user(|/.*)$": "<rootDir>/libs/user/src/$1"
+      "^@app/user(|/.*)$": "<rootDir>/libs/user/src/$1",
+      "^@app/tenant(|/.*)$": "<rootDir>/libs/tenant/src/$1"
     }
   }
 }

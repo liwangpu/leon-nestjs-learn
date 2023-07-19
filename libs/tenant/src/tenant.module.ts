@@ -4,18 +4,20 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { CommandHandlers } from './commands/handlers';
 import { ProfileController } from './controllers';
 import { UserController } from './controllers/user.controller';
-import { User, UserSchema } from './models';
+import { Tenant, TenantSchema, User, UserSchema } from './models';
 import { Services } from './services';
 import { AuthController } from './controllers/auth.controller';
 import { JwtModule } from '@nestjs/jwt';
 import { TMP_JWT_SECRET } from './consts';
 import { Guards } from './guards';
+import { TenantController } from './controllers/tenant.controller';
 
 @Module({
   imports: [
     CqrsModule,
     MongooseModule.forFeature([
       { name: User.name, schema: UserSchema },
+      { name: Tenant.name, schema: TenantSchema },
     ]),
     JwtModule.register({
       global: true,
@@ -27,6 +29,7 @@ import { Guards } from './guards';
     UserController,
     ProfileController,
     AuthController,
+    TenantController,
   ],
   providers: [
     ...CommandHandlers,
@@ -35,4 +38,4 @@ import { Guards } from './guards';
   ],
   exports: [],
 })
-export class UserModule { }
+export class TenantModule { }

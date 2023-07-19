@@ -1,5 +1,5 @@
 import { BookModule } from '@app/book';
-import { UserModule } from '@app/user';
+import { TenantModule } from '@app/tenant';
 import { Module, OnApplicationBootstrap, BeforeApplicationShutdown, OnApplicationShutdown } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 
@@ -15,7 +15,7 @@ const connectedString = `mongodb://${connectedInfo.user}:${connectedInfo.passwor
 
 @Module({
   imports: [
-    UserModule,
+    TenantModule,
     BookModule,
     MongooseModule.forRoot(connectedString),
   ],
