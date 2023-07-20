@@ -7,6 +7,7 @@ import { Services } from './services';
 import { ClsModule } from 'nestjs-cls';
 import { EventHandlers } from './events/handlers';
 import { Sagas } from './sagas';
+import { ValidationRules } from './validations';
 
 @Module({
   imports: [
@@ -23,8 +24,10 @@ import { Sagas } from './sagas';
     ...CommandHandlers,
     ...EventHandlers,
     ...Services,
+    ...ValidationRules,
     ...Sagas,
   ],
-  exports: [],
+  exports: [
+  ],
 })
 export class TenantModule { }

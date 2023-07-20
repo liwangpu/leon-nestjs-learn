@@ -13,7 +13,7 @@ export class UserController {
 
   @Post()
   public async create(@Body() dto: CreateUserDTO): Promise<any> {
-    return this.commandBus.execute(new CreateUserCommand(dto.name, dto.email));
+    return this.commandBus.execute(new CreateUserCommand(dto.name, dto.email, ''));
   }
 
 }

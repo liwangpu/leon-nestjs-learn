@@ -1,13 +1,10 @@
+import { TenantType } from '@app/common';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { ClsService } from 'nestjs-cls';
-import { TenantType } from '../enums';
 import { Tenant } from '../models';
 
-// @Injectable({
-//   // scope: Scope.REQUEST
-// })
 @Injectable()
 export class TenantService {
 
@@ -27,6 +24,11 @@ export class TenantService {
     return this.model.findOne({
       type: TenantType.supplier,
     });
+  }
+
+  public async checkTenantExists(filter: Partial<Tenant>): Promise<boolean> {
+    const count = await this.model.count(filter);
+    return !!count;
   }
 
   public async checkSupplierExists(): Promise<boolean> {

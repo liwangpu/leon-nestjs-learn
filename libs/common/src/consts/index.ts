@@ -1,2 +1,4 @@
 
 export const TMP_JWT_SECRET = '123456789';
+
+export const USER_DEFAULT_PASSWORD = '25f9e794323b453885f5181f1b624d0b';

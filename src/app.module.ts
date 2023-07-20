@@ -44,9 +44,7 @@ export class AppModule implements OnApplicationBootstrap, BeforeApplicationShutd
 
   public constructor(
     private readonly eventBus: EventBus,
-  ) {
-
-  }
+  ) { }
 
   public async onApplicationBootstrap() {
     // console.log(`app bootstrap!`);

@@ -1,4 +1,4 @@
-import { TenantType } from '../../enums';
+import { TenantType } from '@app/common';
 import { CreateTenantDTO, Tenant } from '../../models';
 
 export class CreateTenantCommand {

@@ -4,6 +4,7 @@ export class CreateUserCommand {
   public constructor(
     public readonly name: string,
     public readonly email: string,
+    public readonly tenantId: string,
     public readonly password?: string
   ) { }
 
