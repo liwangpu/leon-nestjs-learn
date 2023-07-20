@@ -1,28 +1,22 @@
-import { TenantService, UserService } from '../../services';
-import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { CreateTenantCommand, CreateUserCommand } from '../impl';
-import { Tenant } from '@app/tenant/models';
+import { TenantService } from '../../services';
+import { CommandHandler, EventBus, ICommandHandler } from '@nestjs/cqrs';
+import { CreateTenantCommand } from '../impl';
+import { TenantCreatedEvent } from '../../events/impl';
 
 @CommandHandler(CreateTenantCommand)
 export class CreateTenantHandler implements ICommandHandler<CreateTenantCommand> {
 
   public constructor(
     private readonly tenantSrv: TenantService,
-  ) { }
+    private readonly eventBus: EventBus,
+  ) {
+    // console.log(`create tenant handler ctor!`);
+  }
 
   public async execute(command: CreateTenantCommand) {
-    // console.log(`create user handler get command:`, command);
-    // const user = await this.userSrv.create(command);
-    // console.log(`user:`, user);
-    // return user;
-
-    const tenant = new Tenant();
-    tenant.name = command.name;
-    tenant.email = command.email;
-    tenant.address = command.address;
-    const createdTenant = await this.tenantSrv.create(tenant);
-    // console.log(`create tenant:`, command);
-
+    const createdTenant = await this.tenantSrv.create(command.toModel());
+    // // console.log(`create tenant:`, command);
+    this.eventBus.publish(new TenantCreatedEvent(createdTenant.id));
     return createdTenant;
   }
 }

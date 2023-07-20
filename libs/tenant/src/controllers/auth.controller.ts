@@ -1,3 +1,4 @@
+import { Public } from '@app/common';
 import { Body, Controller, Post } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
 import { LoginCommand } from '../commands/impl';
@@ -10,9 +11,9 @@ export class AuthController {
     private readonly commandBus: CommandBus,
   ) { }
 
+  @Public()
   @Post('login')
   public async create(@Body() dto: LoginDTO): Promise<any> {
-    console.log(`loging:`, dto);
     return this.commandBus.execute(new LoginCommand(dto.username, dto.password));
   }
 

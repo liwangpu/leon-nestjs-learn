@@ -3,6 +3,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { BookController } from './controllers/book.controller';
 import { Book, BookSchema } from './models';
 import { BookService } from './services';
+import { CustomCommandBus } from './services/custom-command-bus';
 
 @Module({
   imports: [

@@ -35,6 +35,12 @@
       ],
       "@app/tenant/*": [
         "libs/tenant/src/*"
+      ],
+      "@app/common": [
+        "libs/common/src"
+      ],
+      "@app/common/*": [
+        "libs/common/src/*"
       ]
     }
   }

@@ -1,7 +1,6 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { CreateUserCommand } from '../commands/impl';
-import { IUserProfile } from '../interfaces';
 import { CreateUserDTO } from '../models';
 
 @Controller('user')
@@ -13,7 +12,7 @@ export class UserController {
   ) { }
 
   @Post()
-  public async create(@Body() dto: CreateUserDTO): Promise<IUserProfile> {
+  public async create(@Body() dto: CreateUserDTO): Promise<any> {
     return this.commandBus.execute(new CreateUserCommand(dto.name, dto.email));
   }
 

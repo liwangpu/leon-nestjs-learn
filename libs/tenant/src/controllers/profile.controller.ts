@@ -1,19 +1,16 @@
-import { Controller, ExecutionContext, Get, Req, UseGuards } from '@nestjs/common';
-import { Reflector } from '@nestjs/core';
-import { AuthGuard } from '../guards';
-import { IUserProfile } from '../interfaces';
+import { Controller, Get, Req } from '@nestjs/common';
+import { UserProfileDTO } from '../models';
 
 @Controller('profile')
 export class ProfileController {
 
-  // public constructor(
   //   private reflector: Reflector
+  // public constructor(
   // ) { }
 
   @Get()
-  @UseGuards(AuthGuard)
-  public async getProfile(@Req() request: Request): Promise<IUserProfile> {
-    const profile: IUserProfile = { id: 'a1', name: 'Leon' };
+  public async getProfile(@Req() request: Request): Promise<UserProfileDTO> {
+    const profile: UserProfileDTO = { id: 'a1', name: 'Leon', email: 'liwang.pu@gmail.com' };
     // console.log(`req:`, request['user']);
     // this.connectSrv.open();
     return profile;

@@ -1,8 +1,9 @@
+import { Entity } from '@app/common';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
 
 @Schema()
-export class User {
+export class User extends Entity {
 
   @Prop()
   public name: string;

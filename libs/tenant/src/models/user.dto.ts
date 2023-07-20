@@ -23,3 +23,9 @@ export class LoginDTO {
   })
   public password: string;
 }
+
+export class UserProfileDTO {
+  id: string;
+  name: string;
+  email: string;
+}
