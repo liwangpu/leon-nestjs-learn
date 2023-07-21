@@ -1,5 +1,6 @@
-import { TenantType } from '@app/common';
+import { TenantType, UserType } from '@app/common';
 import { IsEmail, IsNotEmpty } from 'class-validator';
+import { ClsStore } from 'nestjs-cls';
 import { TenantEmailExists, TenantExists } from '../validations';
 
 export class CreateTenantDTO {
@@ -7,7 +8,7 @@ export class CreateTenantDTO {
   @IsNotEmpty({
     message: '名称为必填信息'
   })
-  // @TenantExists()
+  @TenantExists()
   public name: string;
 
   @IsNotEmpty({
@@ -19,8 +20,12 @@ export class CreateTenantDTO {
     message: '邮箱为必填信息'
   })
   @IsEmail()
-  // @TenantEmailExists()
+  @TenantEmailExists()
   public email: string;
+  @IsNotEmpty({
+    message: '电话为必填信息'
+  })
+  public phone: string;
   public address: string;
   public type: TenantType;
 }

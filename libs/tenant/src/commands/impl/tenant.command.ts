@@ -7,12 +7,13 @@ export class CreateTenantCommand {
     public readonly name: string,
     public readonly legalPerson: string,
     public readonly email: string,
+    public readonly phone: string,
     public readonly address?: string,
     public readonly type?: TenantType,
   ) { }
 
   public static fromDTO(dto: CreateTenantDTO): CreateTenantCommand {
-    return new CreateTenantCommand(dto.name, dto.legalPerson, dto.email, dto.address);
+    return new CreateTenantCommand(dto.name, dto.legalPerson, dto.email, dto.phone, dto.address);
   }
 
   public toModel(): Tenant {
@@ -20,6 +21,7 @@ export class CreateTenantCommand {
     model.name = this.name;
     model.legalPerson = this.legalPerson;
     model.email = this.email;
+    model.phone = this.phone;
     model.address = this.address;
     model.type = this.type;
     return model;

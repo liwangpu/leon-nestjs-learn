@@ -1,7 +1,8 @@
-import { UserType } from '@app/common';
+import { ITokenPayload, UserType } from '@app/common';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from './user.service';
+// import { MD5 } from 'crypto-js';
 
 @Injectable()
 export class AuthService {
@@ -12,12 +13,11 @@ export class AuthService {
   ) { }
 
   public async signIn(username, pass) {
-    // const user = await this.usersService.findOne(username);
-    const user = { id: 'a1', username: 'leon', password: '123', };
+    const user = await this.usersService.findUserByAccount(username);
     if (user?.password !== pass) {
       throw new UnauthorizedException();
     }
-    const payload = { sub: user.id, username: user.username, tenantId: 'xxx', userType: UserType.admin };
+    const payload: ITokenPayload = { userId: user.id, tenantId: user.tenantId, userType: UserType.admin };
     return {
       access_token: await this.jwtService.signAsync(payload),
     };

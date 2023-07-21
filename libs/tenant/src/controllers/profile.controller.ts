@@ -1,18 +1,20 @@
-import { Controller, Get, Req } from '@nestjs/common';
-import { UserProfileDTO } from '../models';
+import { Controller, Get } from '@nestjs/common';
+import { ClsService } from 'nestjs-cls';
+import { IdentityStore, UserProfileDTO } from '../models';
+import { UserService } from '../services';
 
 @Controller('profile')
 export class ProfileController {
 
-  //   private reflector: Reflector
-  // public constructor(
-  // ) { }
+  public constructor(
+    private readonly cls: ClsService<IdentityStore>,
+    private readonly userSrv: UserService,
+  ) { }
 
   @Get()
-  public async getProfile(@Req() request: Request): Promise<UserProfileDTO> {
-    const profile: UserProfileDTO = { id: 'a1', name: 'Leon', email: 'liwang.pu@gmail.com' };
-    // console.log(`req:`, request['user']);
-    // this.connectSrv.open();
-    return profile;
+  public async getProfile(): Promise<UserProfileDTO> {
+    const userId = this.cls.get('userId');
+    const user = await this.userSrv.getById(userId);
+    return UserProfileDTO.fromModel(user);
   }
 }

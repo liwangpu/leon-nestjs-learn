@@ -1,4 +1,4 @@
-import { Entity } from '@app/common';
+import { Entity, TenantType } from '@app/common';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
 
@@ -13,12 +13,14 @@ export class Tenant extends Entity {
 
   @Prop()
   public email: string;
+  @Prop()
+  public phone: string;
 
   @Prop()
   public address: string;
 
-  @Prop()
-  public type: string;
+  @Prop({ type: 'string' })
+  public type: TenantType;
 
 }
 

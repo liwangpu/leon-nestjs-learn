@@ -1,10 +1,12 @@
-import { ApplicationBootstrapEvent, TenantType } from '@app/common';
+import { ApplicationBootstrapEvent, TenantType, UserType } from '@app/common';
+import { USER_DEFAULT_PASSWORD } from '@app/common/consts';
 import { Injectable } from '@nestjs/common';
 import { ICommand, ofType, Saga } from '@nestjs/cqrs';
 import { map, Observable, switchMap } from 'rxjs';
-import { CreateTenantCommand } from '../commands/impl';
+import { CreateTenantCommand, CreateUserCommand } from '../commands/impl';
 import { TenantCreatedEvent } from '../events/impl';
 import { TenantService } from '../services';
+
 
 @Injectable()
 export class TenantSagas {
@@ -18,11 +20,8 @@ export class TenantSagas {
     return events$
       .pipe(
         ofType(TenantCreatedEvent),
-        // delay(200),
         map(event => {
-          console.log(`sagas create tenant admin:`, event);
-          // return new DropAncientItemCommand(event.heroId, itemId);
-          return null;
+          return new CreateUserCommand(event.legalPerson, event.email, event.phone, event.id, UserType.admin, USER_DEFAULT_PASSWORD);
         }),
       );
   }
@@ -33,7 +32,7 @@ export class TenantSagas {
       .pipe(
         ofType(ApplicationBootstrapEvent),
         switchMap(() => this.tenantSrv.checkSupplierExists()),
-        map(exists => exists ? null : new CreateTenantCommand('Lowcode', '蒲先生', 'liwang.pu@gmail.com', '广西来宾', TenantType.supplier))
+        map(exists => exists ? null : new CreateTenantCommand('Lowcode', '蒲先生', 'liwang.pu@gmail.com', '15721457986', '广西来宾', TenantType.supplier))
       );
   }
 

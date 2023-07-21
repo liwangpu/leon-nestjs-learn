@@ -14,7 +14,7 @@ export class TenantService {
   ) { }
 
   public async create(tenant: Tenant) {
-    console.log(`tenant service get user:`, this.cls.get('user'));
+    // console.log(`tenant service get user:`, this.cls.get('user'));
     const createdTenant = new this.model(tenant);
     // createdTenant._id='defaultId';
     return createdTenant.save();

@@ -3,7 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { TMP_JWT_SECRET } from '../consts';
 import { Request } from 'express';
 import { Reflector } from '@nestjs/core';
-import { IS_PUBLIC_KEY } from '@app/common';
+import { IS_PUBLIC_KEY, ITokenPayload } from '@app/common';
 import { ClsService } from 'nestjs-cls';
 
 @Injectable()
@@ -28,7 +28,7 @@ export class AuthGuard implements CanActivate {
       throw new UnauthorizedException();
     }
     try {
-      const payload = await this.jwtService.verifyAsync(
+      const payload: ITokenPayload = await this.jwtService.verifyAsync(
         token,
         {
           secret: TMP_JWT_SECRET
@@ -37,7 +37,11 @@ export class AuthGuard implements CanActivate {
       // 💡 We're assigning the payload to the request object here
       // so that we can access it in our route handlers
       request['user'] = payload;
-      this.cls.set('user', payload);
+      // this.cls.set('user', payload);
+      this.cls.set('userId', payload.userId);
+      this.cls.set('userType', payload.userType);
+      this.cls.set('tenantId', payload.tenantId);
+
     } catch {
       throw new UnauthorizedException();
     }

@@ -1,4 +1,13 @@
+import { UserType } from '@app/common';
 import { IsEmail, IsNotEmpty } from 'class-validator';
+import { ClsStore } from 'nestjs-cls';
+import { User } from './user.schema';
+
+export interface IdentityStore extends ClsStore {
+  userId: string;
+  tenantId: string;
+  userType: UserType;
+}
 
 export class CreateUserDTO {
 
@@ -25,7 +34,21 @@ export class LoginDTO {
 }
 
 export class UserProfileDTO {
-  id: string;
-  name: string;
-  email: string;
+  public id: string;
+  public name: string;
+  public email: string;
+  public phone: string;
+  public type: UserType;
+  public tenantId: string;
+
+  public static fromModel(user: User): UserProfileDTO {
+    const dto = new UserProfileDTO();
+    dto.id = user.id;
+    dto.name = user.name;
+    dto.email = user.email;
+    dto.phone = user.phone;
+    dto.type = user.type;
+    dto.tenantId = user.tenantId;
+    return dto;
+  }
 }

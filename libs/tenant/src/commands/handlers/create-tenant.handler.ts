@@ -14,9 +14,10 @@ export class CreateTenantHandler implements ICommandHandler<CreateTenantCommand>
   }
 
   public async execute(command: CreateTenantCommand) {
-    const createdTenant = await this.tenantSrv.create(command.toModel());
+    const tenant = await this.tenantSrv.create(command.toModel());
     // // console.log(`create tenant:`, command);
-    this.eventBus.publish(new TenantCreatedEvent(createdTenant.id));
-    return createdTenant;
+    
+    this.eventBus.publish(new TenantCreatedEvent(tenant.id, tenant.type, tenant.email, tenant.phone, tenant.legalPerson));
+    return tenant;
   }
 }

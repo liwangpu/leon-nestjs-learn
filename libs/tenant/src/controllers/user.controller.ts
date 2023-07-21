@@ -1,3 +1,4 @@
+import { UserType } from '@app/common';
 import { Body, Controller, Post } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { CreateUserCommand } from '../commands/impl';
@@ -13,7 +14,9 @@ export class UserController {
 
   @Post()
   public async create(@Body() dto: CreateUserDTO): Promise<any> {
-    return this.commandBus.execute(new CreateUserCommand(dto.name, dto.email, ''));
+    // return this.commandBus.execute(new CreateUserCommand(dto.name, dto.email, UserType.user, ''));
+    
+    
   }
 
 }
