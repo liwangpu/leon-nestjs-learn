@@ -3,12 +3,6 @@ import { IsEmail, IsNotEmpty } from 'class-validator';
 import { ClsStore } from 'nestjs-cls';
 import { User } from './user.schema';
 
-export interface IdentityStore extends ClsStore {
-  userId: string;
-  tenantId: string;
-  userType: UserType;
-}
-
 export class CreateUserDTO {
 
   @IsNotEmpty({

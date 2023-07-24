@@ -1,6 +1,7 @@
+import { IdentityStore } from '@app/common';
 import { Controller, Get } from '@nestjs/common';
 import { ClsService } from 'nestjs-cls';
-import { IdentityStore, UserProfileDTO } from '../models';
+import { UserProfileDTO } from '../models';
 import { UserService } from '../services';
 
 @Controller('profile')

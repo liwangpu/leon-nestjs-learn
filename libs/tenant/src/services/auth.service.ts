@@ -2,7 +2,6 @@ import { ITokenPayload, UserType } from '@app/common';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UserService } from './user.service';
-// import { MD5 } from 'crypto-js';
 
 @Injectable()
 export class AuthService {

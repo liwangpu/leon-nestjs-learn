@@ -10,14 +10,13 @@ export class TenantService {
 
   public constructor(
     @InjectModel(Tenant.name) private model: Model<Tenant>,
-    private readonly cls: ClsService,
   ) { }
 
-  public async create(tenant: Tenant) {
+  public async create(item: Tenant) {
     // console.log(`tenant service get user:`, this.cls.get('user'));
-    const createdTenant = new this.model(tenant);
+    const createdItem = new this.model(item);
     // createdTenant._id='defaultId';
-    return createdTenant.save();
+    return createdItem.save();
   }
 
   public getSupplier(): Promise<Tenant> {

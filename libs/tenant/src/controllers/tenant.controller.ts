@@ -10,13 +10,10 @@ export class TenantController {
   public constructor(
     private readonly commandBus: CommandBus,
     private readonly queryBus: QueryBus,
-  ) {
-    // console.log(`tenant controller ctor!`,);
-  }
+  ) { }
 
   @Post()
   public async create(@Body() dto: CreateTenantDTO, @Req() req: Request): Promise<any> {
-    // console.log(`req:`,req);
     return this.commandBus.execute(CreateTenantCommand.fromDTO(dto));
   }
 

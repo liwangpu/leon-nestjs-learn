@@ -1,5 +1,6 @@
 import { BookModule } from '@app/book';
 import { ApplicationBootstrapEvent, AuthGuard, CommonModule } from '@app/common';
+import { PackageModule } from '@app/package';
 import { TenantModule } from '@app/tenant';
 import { Module, OnApplicationBootstrap, BeforeApplicationShutdown, OnApplicationShutdown } from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
@@ -21,6 +22,7 @@ const connectedString = `mongodb://${connectedInfo.user}:${connectedInfo.passwor
   imports: [
     CommonModule,
     TenantModule,
+    PackageModule,
     BookModule,
     MongooseModule.forRoot(connectedString),
     ClsModule.forRoot({
