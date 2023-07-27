@@ -27,6 +27,10 @@ export class LoginDTO {
   public password: string;
 }
 
+export class RefreshTokenDTO {
+  public access_token: string;
+}
+
 export class UserProfileDTO {
   public id: string;
   public name: string;

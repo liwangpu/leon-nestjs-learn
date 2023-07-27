@@ -25,11 +25,10 @@ export class CreateUserCommand {
   }
 }
 
-export class LoginCommand {
+
+export class SignTokenCommand {
 
   public constructor(
-    public readonly username: string,
-    public readonly password: string
+    public readonly userId: string,
   ) { }
-
 }

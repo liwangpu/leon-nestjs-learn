@@ -7,15 +7,12 @@ import { UserService } from './user.service';
 export class AuthService {
 
   public constructor(
-    private usersService: UserService,
-    private jwtService: JwtService
+    private readonly userService: UserService,
+    private readonly jwtService: JwtService,
   ) { }
 
-  public async signIn(username, pass) {
-    const user = await this.usersService.findUserByAccount(username);
-    if (user?.password !== pass) {
-      throw new UnauthorizedException();
-    }
+  public async signIn(userId: string) {
+    const user = await this.userService.getById(userId);
     const payload: ITokenPayload = { userId: user.id, tenantId: user.tenantId, userType: UserType.admin };
     return {
       access_token: await this.jwtService.signAsync(payload),

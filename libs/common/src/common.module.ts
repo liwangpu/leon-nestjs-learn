@@ -10,7 +10,9 @@ import { TMP_JWT_SECRET } from './consts';
     JwtModule.register({
       global: true,
       secret: TMP_JWT_SECRET,
-      signOptions: { expiresIn: `1 days` },
+      // publicKey: 'petrel',
+      signOptions: { expiresIn: `2 days` },
+      // signOptions: { expiresIn: `5s` },
     }),
   ],
   providers: [
