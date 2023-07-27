@@ -38,6 +38,8 @@ export class UserProfileDTO {
   public phone: string;
   public type: UserType;
   public tenantId: string;
+  public tenantName: string;
+
 
   public static fromModel(user: User): UserProfileDTO {
     const dto = new UserProfileDTO();

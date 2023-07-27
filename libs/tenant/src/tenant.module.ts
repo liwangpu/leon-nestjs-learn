@@ -8,6 +8,7 @@ import { ClsModule } from 'nestjs-cls';
 import { EventHandlers } from './events/handlers';
 import { Sagas } from './sagas';
 import { ValidationRules } from './validations';
+import { QueryHandlers } from './queries/handlers';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { ValidationRules } from './validations';
   ],
   providers: [
     ...CommandHandlers,
+    ...QueryHandlers,
     ...EventHandlers,
     ...Services,
     ...ValidationRules,

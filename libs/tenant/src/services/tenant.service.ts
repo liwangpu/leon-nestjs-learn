@@ -2,7 +2,6 @@ import { TenantType } from '@app/common';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { ClsService } from 'nestjs-cls';
 import { Tenant } from '../models';
 
 @Injectable()
@@ -17,6 +16,10 @@ export class TenantService {
     const createdItem = new this.model(item);
     // createdTenant._id='defaultId';
     return createdItem.save();
+  }
+
+  public async getById(id: string): Promise<Tenant> {
+    return this.model.findById(id);
   }
 
   public getSupplier(): Promise<Tenant> {

@@ -1,21 +1,17 @@
-import { IdentityStore } from '@app/common';
 import { Controller, Get } from '@nestjs/common';
-import { ClsService } from 'nestjs-cls';
+import { QueryBus } from '@nestjs/cqrs';
 import { UserProfileDTO } from '../models';
-import { UserService } from '../services';
+import { UserProfileQuery } from '../queries/impl';
 
 @Controller('profile')
 export class ProfileController {
 
   public constructor(
-    private readonly cls: ClsService<IdentityStore>,
-    private readonly userSrv: UserService,
+    private readonly queryBus: QueryBus,
   ) { }
 
   @Get()
   public async getProfile(): Promise<UserProfileDTO> {
-    const userId = this.cls.get('userId');
-    const user = await this.userSrv.getById(userId);
-    return UserProfileDTO.fromModel(user);
+    return this.queryBus.execute(new UserProfileQuery());
   }
 }
