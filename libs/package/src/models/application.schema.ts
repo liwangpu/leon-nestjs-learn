@@ -13,6 +13,8 @@ export class Application extends Entity {
   public packageId: string;
   @Prop()
   public icon?: string;
+  @Prop()
+  public page?: string;
 
 }
 

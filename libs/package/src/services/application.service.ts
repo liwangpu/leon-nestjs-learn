@@ -1,9 +1,9 @@
-import { IdentityStore, TenantType } from '@app/common';
-import { Injectable } from '@nestjs/common';
+import { IdentityStore } from '@app/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import mongoose, { Model, } from 'mongoose';
 import { ClsService } from 'nestjs-cls';
-import { Application, AppPackage } from '../models';
+import { Application } from '../models';
 
 @Injectable()
 export class ApplicationService {
@@ -16,8 +16,21 @@ export class ApplicationService {
   public async create(item: Application) {
     item.tenantId = this.getTenantId();
     const createdItem = new this.model(item);
-
     return createdItem.save();
+  }
+
+  public async update(item: Application) {
+    item.tenantId = this.getTenantId();
+    const existingItem = await this.model.findByIdAndUpdate(item.id, item);
+    if (!existingItem) {
+      throw new NotFoundException(`记录 #${item.id} 没有找到!`);
+    }
+    return existingItem;
+  }
+
+
+  public async getById(id: string): Promise<Application> {
+    return this.model.findById(id);
   }
 
   public async delete(id: string) {
