@@ -3,6 +3,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ClsModule } from 'nestjs-cls';
 import { CommandHandlers } from './commands/handlers';
 import { Controllers } from './controllers';
+import { EventHandlers } from './events/handlers';
 import { Application, ApplicationSchema, AppPackage, AppPackageSchema } from './models';
 import { QueryHandlers } from './queries/handlers';
 import { Services } from './services';
@@ -16,6 +17,7 @@ import { Validations } from './validations';
     ...Services,
     ...CommandHandlers,
     ...QueryHandlers,
+    ...EventHandlers,
     ...Validations,
   ],
   imports: [

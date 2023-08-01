@@ -25,7 +25,6 @@ export class AppPackageController {
 
   @Delete(':id')
   public async delete(@Param('id') id): Promise<AppPackageDTO> {
-    console.log(`delete id:`,id);
     return this.commandBus.execute(new DeleteAppPackageCommand(id));
   }
 }

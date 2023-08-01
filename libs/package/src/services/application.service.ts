@@ -39,6 +39,10 @@ export class ApplicationService {
     });
   }
 
+  public async deleteByPackage(packageId: string) {
+    return this.model.deleteMany({ packageId });
+  }
+
   public async query(packageId: string): Promise<Array<Application>> {
     const tenantId = this.getTenantId();
     return this.model.find({ tenantId, packageId });

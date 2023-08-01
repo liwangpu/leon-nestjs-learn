@@ -1,6 +1,13 @@
 import { Entity } from '@app/common';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
+import { HydratedDocument, SchemaTypes } from 'mongoose';
+
+export interface IApplicationField {
+  id: string;
+  type: string;
+  title: string;
+  [key: string]: any;
+}
 
 @Schema()
 export class Application extends Entity {
@@ -15,7 +22,8 @@ export class Application extends Entity {
   public icon?: string;
   @Prop()
   public page?: string;
-
+  @Prop({ type: SchemaTypes.Array })
+  public fields?: Array<IApplicationField>;
 }
 
 export const ApplicationSchema = SchemaFactory.createForClass(Application);
