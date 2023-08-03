@@ -1,4 +1,4 @@
-version: '3.4'
+version: '3.5'
 
 services:
 
@@ -12,8 +12,15 @@ services:
       - "8802:3000"
     restart: always
     environment:
-      DATABASE_HOST: localhost
-      DATABASE_PORT: 9703
+      DATABASE_HOST: eon-database
+      DATABASE_PORT: 27017
       DATABASE_NAME: lowcode
       DATABASE_USER: leon
       DATABASE_PASSWORD: Leon.pu199139!
+    networks:
+      - devnet
+
+networks:
+  devnet:
+    name: server-global-network
+    external: true

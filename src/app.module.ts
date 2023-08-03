@@ -17,16 +17,21 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     BookModule,
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
-      useFactory: async () => {
+      useFactory: async (confSrv: ConfigService, logger: Logger) => {
+        // console.log(`ss:`, ss, s1);
         const connectedString = `mongodb://${process.env['DATABASE_USER']}:${process.env['DATABASE_PASSWORD']}@${process.env['DATABASE_HOST']}:${process.env['DATABASE_PORT']}/${process.env['DATABASE_NAME']}?authSource=admin`;
         // console.log(`connectedString:`, connectedString);
         return {
           uri: connectedString,
-          retryAttempts: 3,
+          retryAttempts: 2,
           // retryDelay: 1000,
+          connectionErrorFactory: err => {
+            logger.error(`connectedString:${connectedString}`);
+            return err;
+          }
         };
       },
-      inject: [ConfigService],
+      inject: [ConfigService, Logger],
     }),
     ClsModule.forRoot({
       global: true,
