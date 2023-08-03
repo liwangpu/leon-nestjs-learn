@@ -7,7 +7,7 @@ services:
     image: registry.cn-shanghai.aliyuncs.com/leon-pu/lowcode-engine-backend:latest
     build: ./
     volumes:
-      - "/var/lowcode-engine-backend/log:/var/lowcode-engine-backend/log"
+      - "/var/lowcode-engine-backend/log:/var/lowcode-engine-backend/dist/log"
     ports:
       - "8802:3000"
     restart: always

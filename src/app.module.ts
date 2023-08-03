@@ -19,11 +19,11 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
       imports: [ConfigModule],
       useFactory: async () => {
         const connectedString = `mongodb://${process.env['DATABASE_USER']}:${process.env['DATABASE_PASSWORD']}@${process.env['DATABASE_HOST']}:${process.env['DATABASE_PORT']}/${process.env['DATABASE_NAME']}?authSource=admin`;
-        console.log(`connectedString:`, connectedString);
+        // console.log(`connectedString:`, connectedString);
         return {
           uri: connectedString,
           retryAttempts: 3,
-          retryDelay: 1000,
+          // retryDelay: 1000,
         };
       },
       inject: [ConfigService],
@@ -59,9 +59,10 @@ export class AppModule implements OnApplicationBootstrap, BeforeApplicationShutd
   ) { }
 
   public async onApplicationBootstrap() {
-    // console.log(`app bootstrap!`);
-    // console.log(`env:`, process.env);
     // this.logger.error('一个启动时候测试的错误');
+    // this.logger.warn('一个启动时候测试的警告');
+    // this.logger.debug('一个启动时候测试的debug');
+    // this.logger.log('一个启动时候测试的info');
     this.eventBus.publish(new ApplicationBootstrapEvent());
   }
 
