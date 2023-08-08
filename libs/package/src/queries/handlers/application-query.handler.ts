@@ -1,7 +1,7 @@
-import { ApplicationService, AppPackageService } from '../../services';
+import { ApplicationService } from '../../services';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { ApplicationQuery, AppPackageQuery } from '../impl';
-import { ApplicationDTO, AppPackageDTO } from '../../models';
+import { ApplicationQuery } from '../impl';
+import { ApplicationDTO } from '../../models';
 
 @QueryHandler(ApplicationQuery)
 export class ApplicationQueryHandler implements IQueryHandler<ApplicationQuery> {

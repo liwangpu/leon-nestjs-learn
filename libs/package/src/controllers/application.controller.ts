@@ -1,5 +1,6 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, NotFoundException, Param, Post, Put } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
+import { NotFoundError } from 'rxjs';
 import { CreateApplicationCommand, UpdateApplicationCommand } from '../commands/impl';
 import { ApplicationDTO, ApplicationQueryDTO, CreateApplicationDTO } from '../models';
 import { ApplicationQuery } from '../queries/impl';
@@ -17,6 +18,9 @@ export class ApplicationController {
   @Get(':id')
   public async get(@Param('id') id): Promise<ApplicationDTO> {
     const model = await this.appSrv.getById(id);
+    if (!model) {
+      throw new NotFoundException(`没有找到id为${id}的应用!`);
+    }
 
     return ApplicationDTO.fromModel(model);
   }

@@ -6,6 +6,7 @@ export class CreateApplicationCommand {
     public readonly name: string,
     public readonly packageId: string,
     public readonly page: string,
+    public readonly fields: Array<any>,
     public readonly icon?: string,
   ) { }
 
@@ -14,12 +15,13 @@ export class CreateApplicationCommand {
     model.name = this.name;
     model.packageId = this.packageId;
     model.page = this.page;
+    model.fields = this.fields;
     model.icon = this.icon;
     return model;
   }
 
   public static fromDTO(dto: CreateApplicationDTO): CreateApplicationCommand {
-    return new CreateApplicationCommand(dto.name, dto.packageId, dto.page, dto.icon);
+    return new CreateApplicationCommand(dto.name, dto.packageId, dto.page,dto.fields, dto.icon);
   }
 
 }
@@ -31,11 +33,12 @@ export class UpdateApplicationCommand {
     public readonly name: string,
     public readonly packageId: string,
     public readonly page: string,
+    public readonly fields: Array<any>,
     public readonly icon?: string,
   ) { }
 
   public static fromDTO(dto: ApplicationDTO): UpdateApplicationCommand {
-    return new UpdateApplicationCommand(dto.id, dto.name, dto.packageId, dto.page, dto.icon);
+    return new UpdateApplicationCommand(dto.id, dto.name, dto.packageId, dto.page, dto.fields, dto.icon);
   }
 
   public toModel(): Application {
@@ -44,6 +47,7 @@ export class UpdateApplicationCommand {
     model.name = this.name;
     model.packageId = this.packageId;
     model.page = this.page;
+    model.fields = this.fields;
     model.icon = this.icon;
     return model;
   }

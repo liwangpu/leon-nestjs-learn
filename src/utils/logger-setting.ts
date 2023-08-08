@@ -26,7 +26,7 @@ function generateCommonRotateFileOption(level: string): DailyRotateFile.DailyRot
     dirname: join(__dirname, `./log/${level}/`),
     filename: '%DATE%.log',
     datePattern: 'YYYY-MM-DD-HH',
-    zippedArchive: true,
+    zippedArchive: false,
     maxSize: '20m',
     maxFiles: '14d',
   };

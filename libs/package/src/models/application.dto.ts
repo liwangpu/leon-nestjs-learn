@@ -15,6 +15,7 @@ export class CreateApplicationDTO {
     message: '页面定义为必填信息'
   })
   public page: string;
+  public fields: Array<any>;
   public icon?: string;
 }
 
@@ -30,6 +31,7 @@ export class ApplicationDTO {
   public name: string;
   public packageId: string;
   public page: string;
+  public fields: Array<any>;
   public icon?: string;
 
   public static fromModel(model: Application): ApplicationDTO {
@@ -38,6 +40,7 @@ export class ApplicationDTO {
     dto.name = model.name;
     dto.packageId = model.packageId;
     dto.page = model.page;
+    dto.fields = model.fields;
     dto.icon = model.icon;
     return dto;
   }
