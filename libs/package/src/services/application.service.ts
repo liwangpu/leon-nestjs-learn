@@ -45,7 +45,11 @@ export class ApplicationService {
 
   public async query(packageId: string): Promise<Array<Application>> {
     const tenantId = this.getTenantId();
-    return this.model.find({ tenantId, packageId });
+    return this.model.find({ tenantId, packageId }, {
+      name: true,
+      packageId: true,
+      // name: true,
+    });
   }
 
   public async checkExists(filter: Partial<Application>): Promise<boolean> {
