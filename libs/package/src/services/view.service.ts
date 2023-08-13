@@ -3,17 +3,17 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import mongoose, { Model, } from 'mongoose';
 import { ClsService } from 'nestjs-cls';
-import { AppPackage } from '../models';
+import { View } from '../models';
 
 @Injectable()
-export class AppPackageService {
+export class ViewService {
 
   public constructor(
-    @InjectModel(AppPackage.name) private model: Model<AppPackage>,
+    @InjectModel(View.name) private model: Model<View>,
     private readonly cls: ClsService<IdentityStore>,
   ) { }
 
-  public async create(item: AppPackage) {
+  public async create(item: View) {
     item.tenantId = this.getTenantId();
     const createdItem = new this.model(item);
 
@@ -26,12 +26,16 @@ export class AppPackageService {
     });
   }
 
-  public async query(): Promise<Array<AppPackage>> {
+  public async query(applicationId: string): Promise<Array<View>> {
     const tenantId = this.getTenantId();
-    return this.model.find({ tenantId });
+    return this.model.find({ tenantId, applicationId }, {
+      name: true,
+      applicationId: true,
+      icon: true,
+    });
   }
 
-  public async checkPackageExists(filter: Partial<AppPackage>): Promise<boolean> {
+  public async checkViewExists(filter: Partial<View>): Promise<boolean> {
     const tenantId = this.getTenantId();
     const count = await this.model.count({ ...filter, tenantId });
     return !!count;

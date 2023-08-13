@@ -29,8 +29,16 @@ export class ApplicationService {
   }
 
 
-  public async getById(id: string): Promise<Application> {
-    return this.model.findById(id);
+  public async getById(id: string, fields: Array<string> = []): Promise<Application> {
+    return this.model.findById(id,
+      fields.length ? fields.reduce((mp, cur) => {
+        if (cur) {
+          mp[cur] = true;
+        }
+
+        return mp;
+      }, {}) : undefined
+    );
   }
 
   public async delete(id: string) {

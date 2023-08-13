@@ -3,7 +3,7 @@ import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { NotFoundError } from 'rxjs';
 import { CreateApplicationCommand, UpdateApplicationCommand } from '../commands/impl';
 import { ApplicationDTO, ApplicationQueryDTO, CreateApplicationDTO } from '../models';
-import { ApplicationQuery } from '../queries/impl';
+import { ApplicationModelQuery, ApplicationQuery } from '../queries/impl';
 import { ApplicationService } from '../services';
 
 @Controller('application')
@@ -39,6 +39,16 @@ export class ApplicationController {
   public async update(@Param('id') id, @Body() dto: ApplicationDTO): Promise<ApplicationDTO> {
     dto.id = id;
     return this.commandBus.execute(UpdateApplicationCommand.fromDTO(dto));
+  }
+
+  @Get('model/:id')
+  public async getModel(@Param('id') id): Promise<any> {
+    const model = await this.appSrv.getById(id);
+    if (!model) {
+      throw new NotFoundException(`没有找到id为${id}的应用!`);
+    }
+
+    return this.queryBus.execute(new ApplicationModelQuery(id));
   }
 
   // @Delete(':id')

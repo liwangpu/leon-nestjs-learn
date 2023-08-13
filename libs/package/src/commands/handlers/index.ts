@@ -1,5 +1,6 @@
 import { CreateAppPackageHandler } from './create-app-package.handler';
 import { CreateApplicationHandler } from './create-application.handler';
+import { CreateViewHandler } from './create-view.handler';
 import { DeleteAppPackageHandler } from './delete-app-package.handler';
 import { UpdateApplicationHandler } from './update-appliction.handler';
 
@@ -8,4 +9,5 @@ export const CommandHandlers = [
   DeleteAppPackageHandler,
   CreateApplicationHandler,
   UpdateApplicationHandler,
+  CreateViewHandler,
 ];

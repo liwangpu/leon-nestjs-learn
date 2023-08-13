@@ -45,3 +45,23 @@ export class ApplicationDTO {
     return dto;
   }
 }
+
+export class ApplicationModelDTO {
+  public id: string;
+  public name: string;
+  public packageId: string;
+  public page: string;
+  public fields: Array<any>;
+  public icon?: string;
+
+  public static fromModel(model: Application): ApplicationModelDTO {
+    const dto = new ApplicationModelDTO();
+    dto.id = model.id;
+    dto.name = model.name;
+    dto.packageId = model.packageId;
+    dto.page = model.page;
+    dto.fields = model.fields;
+    dto.icon = model.icon;
+    return dto;
+  }
+}

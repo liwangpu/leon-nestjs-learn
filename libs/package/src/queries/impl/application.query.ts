@@ -4,3 +4,9 @@ export class ApplicationQuery {
     public readonly packageId: string,
   ) { }
 }
+
+export class ApplicationModelQuery {
+  public constructor(
+    public readonly id: string,
+  ) { }
+}
