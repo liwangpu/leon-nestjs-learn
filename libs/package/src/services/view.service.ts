@@ -1,5 +1,5 @@
 import { IdentityStore } from '@app/common';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import mongoose, { Model, } from 'mongoose';
 import { ClsService } from 'nestjs-cls';
@@ -20,6 +20,12 @@ export class ViewService {
     return createdItem.save();
   }
 
+  public async update(item: View) {
+    item.tenantId = this.getTenantId();
+    const existingItem = await this.model.findByIdAndUpdate(item.id, item);
+    return existingItem;
+  }
+
   public async delete(id: string) {
     return this.model.deleteOne({
       _id: new mongoose.Types.ObjectId(id),
@@ -33,6 +39,18 @@ export class ViewService {
       applicationId: true,
       icon: true,
     });
+  }
+
+  public async getById(id: string, fields: Array<string> = []): Promise<View> {
+    return this.model.findById(id,
+      fields.length ? fields.reduce((mp, cur) => {
+        if (cur) {
+          mp[cur] = true;
+        }
+
+        return mp;
+      }, {}) : undefined
+    );
   }
 
   public async checkViewExists(filter: Partial<View>): Promise<boolean> {

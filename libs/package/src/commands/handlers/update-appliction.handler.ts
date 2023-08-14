@@ -1,6 +1,6 @@
 import { ApplicationService } from '../../services';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { CreateApplicationCommand, UpdateApplicationCommand } from '../impl';
+import { UpdateApplicationCommand } from '../impl';
 import { ApplicationDTO } from '../../models';
 
 @CommandHandler(UpdateApplicationCommand)
@@ -11,7 +11,8 @@ export class UpdateApplicationHandler implements ICommandHandler<UpdateApplicati
   ) { }
 
   public async execute(command: UpdateApplicationCommand): Promise<ApplicationDTO> {
-    const updatedItem = await this.appSrv.update(command.toModel());
-    return ApplicationDTO.fromModel(updatedItem);
+    await this.appSrv.update(command.toModel());
+    const model = await this.appSrv.getById(command.id);
+    return ApplicationDTO.fromModel(model);
   }
 }
