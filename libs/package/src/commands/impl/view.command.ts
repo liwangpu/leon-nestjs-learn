@@ -40,7 +40,6 @@ export class UpdateViewCommand {
 
   public toModel(): View {
     const model = new View();
-    console.log(`name:`,this.name);
     model.id = this.id;
     model.name = this.name;
     model.applicationId = this.applicationId;
