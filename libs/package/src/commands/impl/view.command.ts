@@ -5,7 +5,7 @@ export class CreateViewCommand {
   public constructor(
     public readonly name: string,
     public readonly applicationId: string,
-    public readonly page: string,
+    public readonly definition: string,
     public readonly icon?: string,
   ) { }
 
@@ -13,13 +13,13 @@ export class CreateViewCommand {
     const model = new View();
     model.name = this.name;
     model.applicationId = this.applicationId;
-    model.page = this.page;
+    model.definition = this.definition;
     model.icon = this.icon;
     return model;
   }
 
   public static fromDTO(dto: CreateViewDTO): CreateViewCommand {
-    return new CreateViewCommand(dto.name, dto.applicationId, dto.page, dto.icon);
+    return new CreateViewCommand(dto.name, dto.applicationId, dto.definition, dto.icon);
   }
 
 }
@@ -30,12 +30,12 @@ export class UpdateViewCommand {
     public readonly id: string,
     public readonly name: string,
     public readonly applicationId: string,
-    public readonly page: string,
+    public readonly definition: string,
     public readonly icon?: string,
   ) { }
 
   public static fromDTO(dto: ViewDTO): UpdateViewCommand {
-    return new UpdateViewCommand(dto.id, dto.name, dto.applicationId, dto.page, dto.icon);
+    return new UpdateViewCommand(dto.id, dto.name, dto.applicationId, dto.definition, dto.icon);
   }
 
   public toModel(): View {
@@ -43,7 +43,7 @@ export class UpdateViewCommand {
     model.id = this.id;
     model.name = this.name;
     model.applicationId = this.applicationId;
-    model.page = this.page;
+    model.definition = this.definition;
     model.icon = this.icon;
     return model;
   }

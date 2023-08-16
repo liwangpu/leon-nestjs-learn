@@ -14,7 +14,7 @@ export class View extends Entity {
   @Prop()
   public icon?: string;
   @Prop()
-  public page?: string;
+  public definition?: string;
 }
 
 export const ViewSchema = SchemaFactory.createForClass(View);

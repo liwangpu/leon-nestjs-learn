@@ -21,7 +21,7 @@ export class Application extends Entity {
   @Prop()
   public icon?: string;
   @Prop()
-  public page?: string;
+  public definition?: string;
   @Prop({ type: SchemaTypes.Array })
   public fields?: Array<IApplicationField>;
 }

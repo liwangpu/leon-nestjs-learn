@@ -13,7 +13,7 @@ export class CreateViewDTO {
   @IsNotEmpty({
     message: '视图定义为必填信息'
   })
-  public page: string;
+  public definition: string;
   public icon?: string;
 }
 
@@ -28,7 +28,7 @@ export class ViewDTO {
   public id: string;
   public name: string;
   public applicationId: string;
-  public page: string;
+  public definition: string;
   public fields: Array<any>;
   public icon?: string;
 
@@ -37,7 +37,7 @@ export class ViewDTO {
     dto.id = model.id;
     dto.name = model.name;
     dto.applicationId = model.applicationId;
-    dto.page = model.page;
+    dto.definition = model.definition;
     dto.icon = model.icon;
     return dto;
   }
