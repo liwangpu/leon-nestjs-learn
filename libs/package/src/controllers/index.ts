@@ -1,9 +1,3 @@
-import { AppPackageController } from './app-package.controller';
-import { ApplicationController } from './application.controller';
-import { ViewController } from './view.controller';
+import { AirportController } from "./airport.controller";
 
-export const Controllers = [
-  AppPackageController,
-  ApplicationController,
-  ViewController,
-];
+export const Controllers = [AirportController];

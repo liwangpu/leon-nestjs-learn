@@ -1,7 +1,5 @@
-import { AppPackageExistsRule, AppPackageExists } from './app-package.validation';
+import { AirportExistsRule, AirportExists } from "./airport.validation";
 
-export const Validations = [
-  AppPackageExistsRule,
-];
+export const Validations = [AirportExistsRule];
 
-export { AppPackageExists };
+export { AirportExists };

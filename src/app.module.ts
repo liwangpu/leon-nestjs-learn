@@ -1,8 +1,18 @@
 import { BookModule } from '@app/book';
-import { ApplicationBootstrapEvent, AuthGuard, CommonModule } from '@app/common';
+import {
+  ApplicationBootstrapEvent,
+  AuthGuard,
+  CommonModule,
+} from '@app/common';
 import { PackageModule } from '@app/package';
 import { TenantModule } from '@app/tenant';
-import { Module, OnApplicationBootstrap, BeforeApplicationShutdown, OnApplicationShutdown, Logger } from '@nestjs/common';
+import {
+  BeforeApplicationShutdown,
+  Logger,
+  Module,
+  OnApplicationBootstrap,
+  OnApplicationShutdown,
+} from '@nestjs/common';
 import { APP_GUARD } from '@nestjs/core';
 import { EventBus } from '@nestjs/cqrs';
 import { MongooseModule } from '@nestjs/mongoose';
@@ -25,10 +35,10 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
           uri: connectedString,
           retryAttempts: 2,
           // retryDelay: 1000,
-          connectionErrorFactory: err => {
+          connectionErrorFactory: (err) => {
             logger.error(`connectedString:${connectedString}`);
             return err;
-          }
+          },
         };
       },
       inject: [ConfigService, Logger],
@@ -55,13 +65,17 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     // Logger,
   ],
 })
-export class AppModule implements OnApplicationBootstrap, BeforeApplicationShutdown, OnApplicationShutdown {
-
+export class AppModule
+  implements
+    OnApplicationBootstrap,
+    BeforeApplicationShutdown,
+    OnApplicationShutdown
+{
   public constructor(
     private readonly eventBus: EventBus,
     private readonly configService: ConfigService,
     private readonly logger: Logger,
-  ) { }
+  ) {}
 
   public async onApplicationBootstrap() {
     // this.logger.error('一个启动时候测试的错误');
@@ -78,5 +92,4 @@ export class AppModule implements OnApplicationBootstrap, BeforeApplicationShutd
   public onApplicationShutdown(signal?: string) {
     // console.log(`app shutdown!`);
   }
-
 }

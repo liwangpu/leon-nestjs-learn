@@ -1,13 +1,5 @@
-import { AppPackageService } from './app-package.service';
-import { ApplicationService } from './application.service';
-import { ViewService } from './view.service';
+import { AirportService } from "./airport.service";
 
-export * from './app-package.service';
-export * from './application.service';
-export * from './view.service';
+export * from "./airport.service";
 
-export const Services = [
-  AppPackageService,
-  ApplicationService,
-  ViewService,
-];
+export const Services = [AirportService];
