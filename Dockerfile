@@ -1,6 +1,6 @@
 FROM node:18-bullseye-slim
 
-WORKDIR /var/lowcode-engine-backend
+WORKDIR /var/custom-devkit-backend
 
 COPY . .
 

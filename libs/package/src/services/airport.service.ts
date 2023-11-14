@@ -1,5 +1,5 @@
 import { IdentityStore } from "@app/common";
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import mongoose, { Model } from "mongoose";
 import { ClsService } from "nestjs-cls";
@@ -17,6 +17,35 @@ export class AirportService {
     const createdItem = new this.model(item);
 
     return createdItem.save();
+  }
+
+  public async update(item: Airport) {
+    item.tenantId = this.getTenantId();
+    const existingItem = await this.model.findByIdAndUpdate(item.id, item, {
+      new: true,
+    });
+    if (!existingItem) {
+      throw new NotFoundException(`记录 #${item.id} 没有找到!`);
+    }
+    return existingItem;
+  }
+
+  public async getById(
+    id: string,
+    fields: Array<string> = []
+  ): Promise<Airport> {
+    return this.model.findById(
+      id,
+      fields.length
+        ? fields.reduce((mp, cur) => {
+            if (cur) {
+              mp[cur] = true;
+            }
+
+            return mp;
+          }, {})
+        : undefined
+    );
   }
 
   public async delete(id: string) {

@@ -18,7 +18,6 @@ export class AirportExistsRule implements ValidatorConstraintInterface {
 
   public async validate(name: string, args: ValidationArguments) {
     const exists = await this.airportSrv.checkAirportExists({ name });
-    console.log(`exists:`, exists);
     return !exists;
   }
 

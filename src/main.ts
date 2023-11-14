@@ -1,8 +1,8 @@
-import { ValidationPipe } from '@nestjs/common';
-import { NestFactory } from '@nestjs/core';
-import { useContainer } from 'class-validator';
-import { AppModule } from './app.module';
-import { createLogger } from './utils';
+import { ValidationPipe } from "@nestjs/common";
+import { NestFactory } from "@nestjs/core";
+import { useContainer } from "class-validator";
+import { AppModule } from "./app.module";
+import { createLogger } from "./utils";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, {
@@ -11,7 +11,7 @@ async function bootstrap() {
 
   useContainer(app.select(AppModule), { fallbackOnErrors: true });
   app.useGlobalPipes(new ValidationPipe());
-  app.setGlobalPrefix('api');
+  app.setGlobalPrefix("api");
   app.enableCors();
 
   await app.listen(3000);

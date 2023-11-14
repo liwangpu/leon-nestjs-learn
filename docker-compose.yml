@@ -2,19 +2,19 @@ version: '3.5'
 
 services:
 
-  lowcode-engine-backend:
-    container_name: lowcode-engine-backend-c
-    image: registry.cn-shanghai.aliyuncs.com/leon-pu/lowcode-engine-backend:latest
+  custom-devkit-backend:
+    container_name: custom-devkit-backend-c
+    image: registry.cn-shanghai.aliyuncs.com/leon-pu/custom-devkit-backend:latest
     build: ./
     volumes:
-      - "/var/lowcode-engine-backend/log:/var/lowcode-engine-backend/dist/log"
+      - "/var/custom-devkit-backend/log:/var/custom-devkit-backend/dist/log"
     ports:
-      - "8802:3000"
+      - "9901:3000"
     restart: always
     environment:
       DATABASE_HOST: eon-database
       DATABASE_PORT: 27017
-      DATABASE_NAME: lowcode
+      DATABASE_NAME: custom-devkit
       DATABASE_USER: leon
       DATABASE_PASSWORD: Leon.pu199139!
     networks:
